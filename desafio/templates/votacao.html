@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Página de Votação
+{% endblock %}
+
+{% block conteudo %}
+    {% include 'componentes/erros.html'   %}
+    {% for item in opcoes.values() %}
+        <p>{{item}}</p>
+        <form action="{{ url_for('votacao') }}" method="post">
+            <input type="hidden" name="opcao", value="{{item}}">
+            <button>Enviar</button>
+        </form>
+    {% endfor %}
+{% endblock %}

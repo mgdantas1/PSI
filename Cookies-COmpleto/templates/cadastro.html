@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+</head>
+<body>
+    <h1>Cadastrar Preferências</h1>
+    <form action=" {{ url_for('register') }} " method="POST">
+        <input type="text" name="nome" placeholder="Nome">
+        <select name="genero" id="genero">
+            <option value="acao">Ação</option>
+            <option value="comedia">Comédia</option>
+            <option value="drama">Drama</option>
+            <option value="sifi">Ficção</option>
+        </select>
+        <button>Enviar</button>
+    </form>
+    
+</body>
+</html>

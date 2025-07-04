@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Carrinho
+{% endblock %}
+
+{% block conteudo %}
+<div>
+    <h1>Meu Carrinho</h1>
+    {% if carrinho %}
+        {% for prod, qnt in carrinho['itens'].items() %}
+        <ul>
+            <li class="produto"> 
+                
+                <p>{{prod}} - {{qnt}}</p>                  
+            </li>
+        </ul>   
+        {% endfor %}
+    {% endif %}
+    <h2>Total: <span>{{valor}}</span> </h2>
+    <form action="{{ url_for('carrinho') }}" method="post">
+        <button>Finalizar Compra</button>
+    </form>
+</div>
+{% endblock %}
