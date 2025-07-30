@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Página Inicial
+{% endblock %}
+
+{% block conteudo %}
+    
+<h1>Página Inicial</h1>
+<a href="{{url_for('login')}}">Login</a>
+<a href="{{url_for('register')}}">Cadastro</a>
+<a href="{{url_for('festa')}}">Festas</a>
+
+{% include 'componentes/messages.html' %}
+
+{% endblock %}
