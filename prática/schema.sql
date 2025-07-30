@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS users(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    email TEXT NOT NULL,
+    senha TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tarefas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    titulo TEXT NOT NULL,
+    descricao TEXT NOT NULL,
+    'status' BOOLEAN NOT NULL,
+    'data' DATE NOT NULL,
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+)

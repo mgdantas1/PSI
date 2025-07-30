@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Cadastro
+{% endblock %}
+
+{% block content %}
+<h1>Cadastro</h1>
+    <form action="{{url_for('register')}}" method="POST">
+        <div class="campos">
+            <label for="nome">Nome</label>
+            <input type="text" name="nome" id="nome">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email">
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" id="senha">
+        </div>
+        <button>Cadastrar</button>
+    </form>
+{% endblock %}
