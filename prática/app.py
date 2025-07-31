@@ -4,7 +4,7 @@ from criar_banco import criar_banco
 
 from flask import Flask, flash, redirect, request, render_template, url_for, session
 
-from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin
+from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -98,3 +98,35 @@ def login():
         # flash
         return redirect(url_for('login'))
     return render_template('login.html')
+
+
+@app.route('/painel_tarefa')
+@login_required
+def painel_tarefa():
+    conn = obter_conexao()
+    res = conn.execute(f'SELECT * FROM tarefas').fetchall()
+    dicio = {}
+    if res:
+        for i in res:
+            dicio[i['id']] = {
+                'titulo': i['titulo'],
+                'descricao': i['descricao'],
+                'data': i['data']
+            }
+            if i['status'] == 1:
+                dicio[i['id']]['status'] = 'Concluída'
+            else:
+                dicio[i['id']]['status'] = 'Pendente'
+
+        return render_template('painel.html', tarefas = dicio)
+    return render_template('painel.html', tarefas = False)
+
+@app.route('/adicionar_tarefa')
+def adicionar_tarefa():
+    pass
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))

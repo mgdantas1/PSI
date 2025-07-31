@@ -6,4 +6,7 @@ def criar_banco():
     with open('schema.sql') as f:
         conexao.executescript(f.read())
 
+
     conexao.close()
+
+criar_banco()

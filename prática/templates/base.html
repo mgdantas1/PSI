@@ -18,9 +18,9 @@
                 <div class="links">
                     <a href="{{url_for('register')}}">Cadastro</a>
                     <a href="{{url_for('login')}}">Login</a>
-                    {% if current_user.is_authenticad %}
-                        <a href="">Tarefas</a>
-                        <a href="">Logout</a>
+                    {% if current_user.is_authenticated %}
+                    <a href="{{url_for('painel_tarefa')}}">Tarefas</a>
+                    <a href="{{url_for('logout')}}">Logout</a>
                     {% endif %}
                 </div>
             </nav>

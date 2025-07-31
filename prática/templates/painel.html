@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Painel de Tarefas
+{% endblock %}
+
+{% block content %}
+    <h1>Painel de Tarefas</h1>
+    {% if tarefas %}
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Status</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for coluna in tarefas.values() %}
+            <tr>
+                {% for dado in coluna.values() %}
+                <td>{{dado}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Ainda não há tarefas.</p>
+    <button><a href="{{url_for('adicionar_tarefa')}}">Adicionar tarefa</a></button>
+    {% endif %}
+{% endblock %}
