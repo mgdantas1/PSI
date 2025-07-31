@@ -1,0 +1,26 @@
+
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Dados Peça
+{% endblock %}
+
+{% block links %}
+    <a href="{{url_for('index')}}">
+        Página Inicial
+    </a>
+{% endblock %}
+
+{% block conteudo %}
+    <h1>Dados Peça</h1>
+    {% if lista %}
+        {% for item in lista %}
+            <p>Nome: {{item.nome}}</p>
+            <p>Turma: {{item.turma}}</p>
+        {% endfor %}
+    {% endif %}
+    {% if peca == None %}
+        <p>Nome: {{peca['nome']}}</p>
+        <p>Turma: {{peca['turma']}}</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Dança
+{% endblock %}
+
+{% block links %}
+    <a href="{{url_for('index')}}">
+        Página Inicial
+    </a>
+{% endblock %}
+
+{% block conteudo %}
+    <h1>Dança</h1>
+    {% if lista %}
+        {% for item in lista %}
+            <p>Nome: {{item.nome}}</p>
+            <p>Matricula: {{item.matricula}}</p>
+        {% endfor %}
+    {% endif %}
+    {% if danca == None %}
+        <p>Nome: {{danca['nome']}}</p>
+        <p>Matricula: {{danca['matricula']}}</p>
+    {% endif %}
+
+{% endblock %}

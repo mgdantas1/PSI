@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Atualizar Dança
+{% endblock %}
+
+{% block links %}
+    <a href="{{url_for('index')}}">
+        Página Inicial
+    </a>
+{% endblock %}
+
+{% block conteudo %}
+    <h1>Atualizar Dança</h1>
+    <form action="{{url_for('update_peca')}}" method="post">
+        <select name="peca" id="peca">
+            {% for item in peca %}
+                <option value="{{item.id}}">
+                    {{item.nome}} - {{item.turma}}
+                </option>
+            {% endfor %}
+            <option value=""></option>
+        </select>
+        <input type="text" name="nome" placeholder="nome">
+        <input type="text" name="turma" placeholder="turma">
+        <button>Enviar</button>
+    </form>
+{% endblock %}

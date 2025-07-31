@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Cadastrar Usuários
+{% endblock %}
+
+{% block links %}
+    Página Inicial
+{% endblock %}
+
+{% block conteudo %}
+    <h1>Página Inicial</h1>
+    <form action="{{url_for('register')}}" method="post">
+        <input type="text" name="nome" placeholder="nome">
+        <input type="text" name="matricula" placeholder="matricula">
+        <input type="password" name="senha" placeholder="senha">
+        <button>Enviar</button>
+    </form>
+{% endblock %}

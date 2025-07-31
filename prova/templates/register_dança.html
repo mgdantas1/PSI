@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Cadastrar Dança
+{% endblock %}
+
+{% block links %}
+    <a href="{{url_for('index')}}">
+        Página Inicial
+    </a>
+{% endblock %}
+
+{% block conteudo %}
+    <h1>Cadastrar Dança</h1>
+    <form action="{{url_for('register_danca')}}" method="post">
+        <input type="text" name="nome" placeholder="nome">
+        <input type="text" name="matricula" placeholder="matricula">
+        <button>Enviar</button>
+    </form>
+{% endblock %}

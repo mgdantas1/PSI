@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Usuário
+{% endblock %}
+
+{% block links %}
+    <a href="{{url_for('index')}}">
+        Página Inicial
+    </a>
+{% endblock %} 
+
+{% block conteudo %}
+    <h1>Usuário</h1>
+    <h3>Matricula: {{user['matricula']}}</h3>
+    <h3>Nome: {{user['nome']}}</h3>
+{% endblock %}
