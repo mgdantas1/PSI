@@ -25,5 +25,6 @@ def index():
     sql = 'SELECT * FROM users'
     lista = conn.execute(sql).fetchall()
     conn.close()
+    # reenviar
 
     return render_template('index.html', lista = lista)
