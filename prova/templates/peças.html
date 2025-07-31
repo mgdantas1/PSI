@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Peças
+{% endblock %}
+
+{% block links %}
+    <a href="{{url_for('index')}}">
+        Página Inicial
+    </a>
+{% endblock %}
+
+{% block conteudo %}
+    <h1>Peças</h1>
+
+    {% for item in lista %}
+        <p>Nome: {{item.nome}}</p>
+        <p>Turma: {{item.turma}}</p>
+        <a href="{{url_for('exibir_peca', nome=item.nome, turma=item.turma)}}">Ver</a>
+        <a href="{{url_for('remover_peca', nome=item.nome, turma=item.turma)}}">Remover peça</a>
+        <hr>
+    {% endfor %}
+{% endblock %}
