@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Nova Disciplina
+{% endblock %}
+
+{% block content %}
+    {% include 'components/messages.html'   %}
+
+    <form action="{{url_for('nova_disciplina')}}" method="post">
+        <label for="nome">Nome da Disciplina:</label>
+        <input type="text" name="nome" placeholder="nome">
+        <label for="prof">Professor:</label>
+        <select name="prof">
+            {% for item in professores %}
+                <option value="{{item.pro_id}}">{{item.pro_nome}}</option>
+            {% endfor %}
+        </select>
+        <button>Enviar</button>
+    </form>
+{% endblock %}

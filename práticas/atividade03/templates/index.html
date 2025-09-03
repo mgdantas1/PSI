@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Página Inicial
+{% endblock %}
+
+{% block content %}
+    <h1>Olá</h1>
+    {% include 'components/messages.html'   %}
+    {% for aluno in alunos %}
+        {% if aluno.disciplina %}
+            <h3>{{aluno.alu_nome}}</h3>
+            {% for disciplina in aluno.disciplina %}
+                <p>{{disciplina.dis_nome}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}

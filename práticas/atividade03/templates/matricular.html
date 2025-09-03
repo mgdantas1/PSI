@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Matricular Aluno
+{% endblock %}
+
+{% block content %}
+    {% include 'components/messages.html'   %}
+    <form action="{{url_for('matricular')}}" method="post">
+        <label for="aluno">Aluno:</label>
+        <select name="aluno">
+            {% for item in alunos %}
+                <option value="{{item.alu_id}}">{{item.alu_nome}}</option>
+            {% endfor %}
+        </select>
+        <label for="disciplina">Disciplina:</label>
+        <select name="disciplina">
+            {% for item in disciplinas %}
+                <option value="{{item.dis_id}}">{{item.dis_nome}}</option>
+            {% endfor %}
+        </select>
+        <button>Enviar</button>
+    </form>
+{% endblock %}
