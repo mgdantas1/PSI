@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Novo Post
+{% endblock %}
+
+{% block content %}
+    <h1>Novo Post</h1>
+    <form action="{{url_for('new_post')}}" method="post">
+        <h2>@{{user.username}}</h2>
+        <textarea name="post" placeholder="Escrever algo..."></textarea>
+        <button>Enviar</button>
+    </form>
+{% endblock %}

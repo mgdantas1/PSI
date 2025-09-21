@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Comentários
+{% endblock %}
+
+{% block content %}
+    <h1>Comentários</h1>
+    {% include 'components/messages.html'   %}
+    <form action="{{url_for('novo_coment', id=request.args.get('id'))}}" method="post">
+        <textarea name="coment" placeholder="Novo comentário"></textarea>
+        <button>Enviar</button>
+    </form>
+    {% for comentario in comentarios %}
+        <span>
+            <h2>@{{comentario.user.username}}</h2>
+            {% if request.args.get('editar') %}
+                <form action="{{url_for('editar_coment', coment_id=comentario.comentario_id)}}" method="post">
+                    <textarea name="novo_comentario" placeholder="Editar comentário"></textarea>
+                    <button>Enviar</button>
+                </form>
+            {% else %}
+                <p>{{comentario.texto}}</p>
+            {% endif %}
+
+            {% if comentario.user.id == current_user.id %}
+                <a href="{{url_for('editar_coment', coment_id=comentario.comentario_id)}}">Editar comentário</a>
+                <a href="{{url_for('remover_coment', coment_id=comentario.comentario_id)}}">Excluir comentário</a>
+            {% else %}
+                <p>{{comentario.texto}}</p>
+            {% endif %}
+        </span>
+    {% endfor %}
+{% endblock %}

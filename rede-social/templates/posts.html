@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Meus Posts
+{% endblock %}
+
+{% block content %}
+    <h1>Meus Posts</h1>
+    {% for post in posts %}
+        <span class="post">
+            <p>{{post.conteudo}}</p>
+            <a href="{{url_for('comentarios', id=post.id)}}">Comentários</a>
+        </span>
+    {% endfor %}
+{% endblock %}
