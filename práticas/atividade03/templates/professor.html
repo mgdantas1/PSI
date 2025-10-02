@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Novo Professor
+{% endblock %}
+
+{% block content %}
+    {% include 'components/messages.html'   %}
+    <form action="{{url_for('novo_professor')}}" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" placeholder="nome">
+        <label for="email">Email:</label>
+        <input type="text" name="email" placeholder="email">
+        <button>Enviar</button>
+    </form>
+{% endblock %}

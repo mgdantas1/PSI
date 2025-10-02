@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Novo Aluno
+{% endblock %}
+
+{% block content %}
+    {% include 'components/messages.html'   %}
+    <form action="{{url_for('novo_aluno')}}" method="POST">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" placeholder="nome" required>
+        <label for="email">Email:</label>
+        <input type="email" name="email" placeholder="email" required>
+        <label for="cursos">Cursos:</label>
+        <select name="cursos">
+            {% for curso in cursos %}
+                <option name="cursos" value="{{curso.curso}}">{{curso.curso}}</option>
+            {% endfor %}
+        </select>
+        <button>Enviar</button>
+    </form>
+{% endblock %}

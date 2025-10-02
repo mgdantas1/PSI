@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            
+        {% endblock %}
+    </title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{url_for('index')}}">Página Inicial</a></li>
+                <li><a href="{{url_for('novo_professor')}}">Professor</a></li>
+                <li><a href="{{url_for('novo_aluno')}}">Aluno</a></li>
+                <li><a href="{{url_for('nova_disciplina')}}">Disciplina</a></li>
+                <li><a href="{{url_for('matricular')}}">Matricular Aluno</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+            
+        {% endblock %}
+    </main>
+</body>
+</html>

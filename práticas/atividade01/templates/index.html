@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Página Inicial
+{% endblock %}
+
+{% block content %}
+    {% include 'components/messages.html'   %}
+    <h1>Olá</h1>
+    {% if alunos %}
+        {% for aluno in alunos.values() %}
+            <p>Nome: {{aluno['nome']}}</p>
+            <p>Email: {{aluno['email']}}</p>
+            <p>Curso: {{aluno['curso']}}</p>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
