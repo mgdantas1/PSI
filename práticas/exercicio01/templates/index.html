@@ -5,6 +5,18 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Olá</h1>
+    <h1>Olá!</h1>
+    {% if current_user.is_authenticated %}
+        {% if times %}
+            <h2>Meus times</h2>
+            <ul>
+                {% for time in times %}
+                    <li>{{time.nome}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% else %}
+        <p>Faça cadastro ou login!</p>
+    {% endif %}
     {% include 'components/messages.html'   %}
 {% endblock %}

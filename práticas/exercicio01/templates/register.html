@@ -9,11 +9,11 @@
     {% include 'components/messages.html'   %}
     <form action="{{url_for('register')}}" method="post">
         <label for="nome">Nome:</label>
-        <input type="text" name="nome" placeholder="nome">
+        <input type="text" name="nome" placeholder="nome" required>
         <label for="email">Email:</label>
-        <input type="email" name="email" placeholder="email">
+        <input type="email" name="email" placeholder="email" required>
         <label for="senha">Senha:</label>
-        <input type="password" name="senha" placeholder="senha">
+        <input type="password" name="senha" placeholder="senha" required>
         <button>Enviar</button>
     </form>
 {% endblock %}

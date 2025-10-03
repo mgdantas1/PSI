@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <h1>Login</h1>
+    {% include 'components/messages.html'   %}
+    <form action="{{url_for('login')}}" method="post">
+        <label for="email">Email:</label>
+        <input type="email" name="email" placeholder="email" required>
+        <label for="senha">Senha:</label>
+        <input type="password" name="senha" placeholder="senha" required>
+        <button>Enviar</button>
+    </form>
+{% endblock %}

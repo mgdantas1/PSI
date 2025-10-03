@@ -1,11 +1,10 @@
 from sqlalchemy import create_engine, String, Float, ForeignKey, Table, Column
-from sqlalchemy.orm import Mapped, mapped_column, relationship, sessionmaker, DeclarativeBase
+from sqlalchemy.orm import Mapped, mapped_column, relationship, Session, DeclarativeBase
 from flask_login import UserMixin
 from typing import List
 
-engine = create_engine('mysql://root:@localhost/usutimes')
-Session = sessionmaker(bind=engine)
-session = Session()
+engine = create_engine('sqlite:///usutimes.db')
+session = Session(bind=engine)
 
 class Base(UserMixin, DeclarativeBase):
     pass
@@ -21,7 +20,7 @@ class User(Base):
     id:Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     nome:Mapped[str] = mapped_column(String(150))
     email:Mapped[str] = mapped_column(String(150), unique=True)
-    senha:Mapped[str] = mapped_column(String(14))
+    senha:Mapped[str] = mapped_column(String)
 
     times:Mapped[List['Time']] = relationship(secondary=users_times, back_populates='users')
 

@@ -13,12 +13,15 @@
     <header>
         <nav>
             <ul>
-                <li><a href="">Início</a></li>
-                <li><a href="">Cadastrar</a></li>
-                <li><a href="">Login</a></li>
-                <li><a href="">Cadastrar Time</a></li>
-                <li><a href="">Escolher Time</a></li>
-                <li><a href="">Logout</a></li>
+                <li><a href="{{url_for('index')}}">Início</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{url_for('register_time')}}">Cadastrar Time</a></li>
+                    <li><a href="{{url_for('option_time')}}">Escolher Time</a></li>
+                    <li><a href="{{'logout'}}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{url_for('register')}}">Cadastrar</a></li>
+                    <li><a href="{{url_for('login')}}">Login</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>

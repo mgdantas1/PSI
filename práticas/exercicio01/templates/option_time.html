@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block time %}
+    Escolher Time
+{% endblock %}
+
+{% block content %}
+    <h1>Opções de Time</h1>
+    {% if times %}
+        <form action="{{url_for('option_time')}}" method="post">
+            <select name="opcao">
+                {% for time in times %}
+                    <option value="{{time.id}}">
+                        {{time.nome}}
+                    </option>
+                {% endfor %}
+            </select>
+            <button>Enviar</button>
+        </form>
+    
+    {% else %}
+        <p>Ainda não há times cadastrados.</p>
+    {% endif %}
+{% endblock %}
