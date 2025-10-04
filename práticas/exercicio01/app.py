@@ -96,11 +96,15 @@ def option_time():
         user_id = current_user.id
         user = session.query(User).filter_by(id=user_id).first()
         time = session.query(Time).get(opcao)
-        user.times.append(time)
-        session.commit()
 
-        flash('Time definido com sucesso!', category='success')
-        return redirect(url_for('index'))
+        if time not in user.times:
+            user.times.append(time)
+            session.commit()
+            flash('Time definido com sucesso!', category='success')
+            return redirect(url_for('index'))
+
+        flash('O usuário já possui o time!', category='error')
+        return redirect(url_for('option_time'))
 
     return render_template('option_time.html', times=times)
 

@@ -1,7 +1,7 @@
 {% with errors = get_flashed_messages(category_filter = ['error'])  %}
     {% if errors %}
         {% for msg in errors %}
-            <span>{{msg}}</span>
+            <span id="error">{{msg}}</span>
         {% endfor %}
     {% endif %}
 {% endwith %}
@@ -10,7 +10,7 @@
 {% with success = get_flashed_messages(category_filter = ['success'])  %}
     {% if success %}
         {% for msg in success %}
-            <span>{{msg}}</span>
+            <span id="success">{{msg}}</span>
         {% endfor %}
     {% endif %}
 {% endwith %}

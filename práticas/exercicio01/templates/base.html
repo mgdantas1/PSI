@@ -8,27 +8,30 @@
         
         {% endblock %}
     </title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{{url_for('index')}}">Início</a></li>
-                {% if current_user.is_authenticated %}
-                    <li><a href="{{url_for('register_time')}}">Cadastrar Time</a></li>
-                    <li><a href="{{url_for('option_time')}}">Escolher Time</a></li>
-                    <li><a href="{{'logout'}}">Logout</a></li>
-                {% else %}
-                    <li><a href="{{url_for('register')}}">Cadastrar</a></li>
-                    <li><a href="{{url_for('login')}}">Login</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    </header>
-    <main>
-        {% block content %}
-            
-        {% endblock %}
-    </main>
+    <div class="container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="{{url_for('index')}}">Início</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{url_for('register_time')}}">Cadastrar Time</a></li>
+                        <li><a href="{{url_for('option_time')}}">Escolher Time</a></li>
+                        <li><a href="{{'logout'}}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{url_for('register')}}">Cadastrar</a></li>
+                        <li><a href="{{url_for('login')}}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {% block content %}
+        
+            {% endblock %}
+        </main>
+    </div>
 </body>
 </html>

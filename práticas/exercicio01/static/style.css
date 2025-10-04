@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    height: 100px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #470024;
+}
+
+
+nav ul {
+    display: flex;
+    gap: 15px;
+}
+
+nav li {
+    list-style: none;
+    background-color: #773054;
+    width: 150px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+nav li:hover {
+    background-color: #680e3b;
+}
+
+nav li a {
+    text-decoration: none;
+    color: white;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    gap: 10px;
+}
+
+main h1 {
+    color: #680e3b;
+}
+
+main {
+    color: #470024;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #680e3b;
+    padding: 25px;
+    border-radius: 15px;
+    color: white;
+}
+
+form label {
+    margin-bottom: -10px;
+}
+
+button {
+    background-color: #773054;
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #eee4e9;
+}
+
+input:focus {
+    outline: none;
+}
+
+button:hover {
+    background-color: #470024;
+}
+
+.times {
+    display: flex;
+    flex-direction: column;
+    background-color: #680e3b;
+    color: white;
+    padding: 15px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 15px;
+}
+
+.times li {
+    list-style: none;
+}
+
+select {
+    border: 0;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+option:focus {
+    background-color: #773054;
+}
+
+#success {
+    background-color: lightgray;
+    color: blue;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+#error {
+    background-color: lightgray;
+    color: red;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
