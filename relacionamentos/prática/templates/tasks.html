@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title_page %}
+    Tarefas
+{% endblock %}
+
+{% block title %}
+    Tarefas
+{% endblock %}
+
+{% block content %}
+    {% include 'components/messages.html'   %}
+    {% if tarefas %}
+        {% for tarefa in tarefas %}
+            <p>{{tarefa.tarefa}}</p>
+            <a href="{{url_for('edit_task', task_id=tarefa.id)}}">Editar Tarefa</a>
+            <a href="{{url_for('delete_task', task_id=tarefa.id)}}">Excluir Tarefa</a>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

@@ -15,9 +15,16 @@
             <nav>
                 <ul>
                     <li><a href="{{url_for('index')}}">Início</a></li>
-                    <li><a href="{{url_for('register')}}">Cadastro</a></li>
-                    <li><a href="{{url_for('login')}}">Login</a></li>
-                    <li><a href="{{url_for('logout')}}">Logout</a></li>
+
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{url_for('tasks')}}">Tarefas</a></li>
+                        <li><a href="{{url_for('new_task')}}">Nova Tarefa</a></li>
+                        <li><a href="{{url_for('logout')}}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{url_for('register')}}">Cadastro</a></li>
+                        <li><a href="{{url_for('login')}}">Login</a></li>
+                    {% endif %}
+
                 </ul>
             </nav>
         </header>
@@ -27,8 +34,9 @@
                     
                 {% endblock %}
             </h1>
+
             {% block content %}
-                
+
             {% endblock %}
         </main>
     </div>

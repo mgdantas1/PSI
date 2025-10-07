@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title_page %}
+    Editar Tarefa
+{% endblock %}
+
+{% block title %}
+    Editar Tarefa
+{% endblock %}
+
+{% block content %}
+    {% include 'components/messages.html'   %}
+    <form action="{{url_for('edit_task', task_id=task_id)}}" method="post">
+        <label for="texto">Nova Tarefa:</label>
+        <textarea name="texto" placeholder="Escreva algo..."></textarea>
+        <button>Enviar</button>
+    </form>
+{% endblock %}

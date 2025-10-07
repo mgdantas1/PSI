@@ -36,11 +36,12 @@ def register():
 
             session.close()
 
+            flash('Usuário cadastrado com sucesso!', category='success')
             return redirect(url_for('index'))
 
-
-
-        return redirect(url_for('index'))
+        session.close()
+        flash('Usuário já possui cadastro!', category='error')
+        return redirect(url_for('login'))
 
     return render_template('register.html')
 
@@ -51,12 +52,91 @@ def login():
         email = request.form['email']
         senha = request.form['senha']
 
-        return redirect(url_for('index'))
+        user = session.query(User).filter_by(email=email).first()
+
+        if user and check_password_hash(user.senha, senha):
+            login_user(user)
+            session.close()
+
+            flash('Login realizado com sucesso!', category='success')
+            return redirect(url_for('index'))
+        
+        session.close()
+        flash('Dados incorretos!', category='error')
+        return redirect(url_for('login'))
 
     return render_template('login.html')
 
 
+@app.route('/new_task', methods=['GET', 'POST'])
+@login_required
+def new_task():
+    if request.method == 'POST':
+        texto = request.form['texto']
+        user_id = current_user.id
+
+        new_task = Tarefa(tarefa=texto, user_id=user_id)
+
+        session.add(new_task)
+        session.commit()
+
+        session.close()
+
+        flash('Tarefa adicionada com sucesso', category='success')
+        return redirect(url_for('tasks'))
+    
+    return render_template('new_tasks.html')
+
+@app.route('/tasks')
+@login_required
+def tasks():
+    user_id = current_user.id
+
+    user = session.get(User, user_id)
+
+    tasks = user.tarefas
+
+    session.close()
+
+    return render_template('tasks.html', tarefas=tasks)
+
+@app.route('/edit_task', methods=['GET', 'POST'])
+def edit_task():
+    task_id = request.args['task_id']
+    if request.method == 'POST':
+        texto = request.form['texto']
+
+        task_id = request.args['task_id']
+
+        task = session.query(Tarefa).filter_by(id=task_id).first()
+        print(f'dentro: {task_id}')
+
+        task.tarefa = texto
+
+        session.commit()
+        session.close()
+
+        flash('Tarefa alterada com sucesso!', category='success')
+        return redirect(url_for('tasks'))
+    
+    return render_template('edit_tasks.html', task_id=task_id)
+
+@app.route('/delete_task')
+@login_required
+def delete_task():
+    task_id = request.args['task_id']
+    
+    task = session.get(Tarefa, task_id)
+
+    session.delete(task)
+    session.commit()
+    session.close()
+
+    flash('Tarefa deletada!', category='success')
+    return redirect(url_for('tasks'))
+
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
 

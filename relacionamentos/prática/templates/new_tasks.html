@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title_page %}
+    Novas Tarefas
+{% endblock %}
+
+{% block title %}
+    Novas Tarefas
+{% endblock %}
+
+{% block content %}
+    <form action="{{url_for('new_task')}}" method="post">
+        <label for="texto">Nova Tarefa:</label>
+        <textarea name="texto" placeholder="Escreva algo..." required></textarea>
+        <button>Enviar</button>
+    </form>
+{% endblock %}
