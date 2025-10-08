@@ -36,12 +36,10 @@ def register():
 
                 login_user(new_user)
 
-                session.close()
 
                 flash('Usuário cadastrado com sucesso!', category='success')
                 return redirect(url_for('index'))
 
-        session.close()
         flash('Usuário já possui cadastro!', category='error')
         return redirect(url_for('login'))
 
@@ -59,12 +57,10 @@ def login():
 
             if user and check_password_hash(user.senha, senha):
                 login_user(user)
-                session.close()
 
                 flash('Login realizado com sucesso!', category='success')
                 return redirect(url_for('index'))
         
-        session.close()
         flash('Dados incorretos!', category='error')
         return redirect(url_for('login'))
 
@@ -84,7 +80,6 @@ def new_task():
             session.add(new_task)
             session.commit()
 
-            session.close()
 
         flash('Tarefa adicionada com sucesso', category='success')
         return redirect(url_for('tasks'))
@@ -101,7 +96,6 @@ def tasks():
 
         tasks = user.tarefas
 
-        session.close()
 
     return render_template('tasks.html', tarefas=tasks)
 
@@ -119,7 +113,6 @@ def edit_task():
             task.tarefa = texto
 
             session.commit()
-            session.close()
 
         flash('Tarefa alterada com sucesso!', category='success')
         return redirect(url_for('tasks'))
@@ -136,7 +129,6 @@ def delete_task():
 
         session.delete(task)
         session.commit()
-        session.close()
 
     flash('Tarefa deletada!', category='success')
     return redirect(url_for('tasks'))
