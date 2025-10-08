@@ -70,21 +70,27 @@ def login():
 @app.route('/new_task', methods=['GET', 'POST'])
 @login_required
 def new_task():
+    with Session(bind=engine) as session:
+        categorias = session.query(Categoria).all()
+
     if request.method == 'POST':
         texto = request.form['texto']
         user_id = current_user.id
+        categoria_id = request.form['categoria']
 
         new_task = Tarefa(tarefa=texto, user_id=user_id)
 
         with Session(bind=engine) as session:
             session.add(new_task)
+            new_cat = session.get(Categoria, categoria_id)
+            new_cat.tarefas.append(new_task)
             session.commit()
 
 
         flash('Tarefa adicionada com sucesso', category='success')
         return redirect(url_for('tasks'))
     
-    return render_template('new_tasks.html')
+    return render_template('new_tasks.html', categorias=categorias)
 
 @app.route('/tasks')
 @login_required
@@ -93,7 +99,6 @@ def tasks():
 
     with Session(bind=engine) as session:
         user = session.get(User, user_id)
-
         tasks = user.tarefas
 
 
@@ -102,22 +107,28 @@ def tasks():
 @app.route('/edit_task', methods=['GET', 'POST'])
 def edit_task():
     task_id = request.args['task_id']
+
+    with Session(bind=engine) as session:
+        categorias = session.query(Categoria).all()
+
+
     if request.method == 'POST':
         texto = request.form['texto']
-
         task_id = request.args['task_id']
+        categoria_id = request.form['categoria']
 
         with Session(bind=engine) as session:
             task = session.query(Tarefa).filter_by(id=task_id).first()
-
+            new_cat = session.get(Categoria, categoria_id)
             task.tarefa = texto
-
+            task.categoria.clear()
+            task.categoria.append(new_cat)
             session.commit()
 
         flash('Tarefa alterada com sucesso!', category='success')
         return redirect(url_for('tasks'))
     
-    return render_template('edit_tasks.html', task_id=task_id)
+    return render_template('edit_tasks.html', task_id=task_id, categorias=categorias)
 
 @app.route('/delete_task')
 @login_required

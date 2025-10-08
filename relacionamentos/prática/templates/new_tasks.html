@@ -12,6 +12,12 @@
     <form action="{{url_for('new_task')}}" method="post">
         <label for="texto">Nova Tarefa:</label>
         <textarea name="texto" placeholder="Escreva algo..." required></textarea>
+        <label for="categoria">Categoria:</label>
+        <select name="categoria">
+            {% for cat in categorias %}
+                <option value="{{cat.id}}">{{cat.categoria}}</option>
+            {% endfor %}
+        </select>
         <button>Enviar</button>
     </form>
 {% endblock %}
