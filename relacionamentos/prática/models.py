@@ -3,7 +3,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship, Session, Declara
 from flask_login import UserMixin
 
 engine = create_engine('mysql://root:@localhost/tarefas')
-session = Session(bind=engine)
+# session = Session(bind=engine)
 
 class Base(UserMixin, DeclarativeBase):
     pass

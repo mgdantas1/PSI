@@ -12,7 +12,8 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):
-    return session.get(User, int(user_id))
+    with Session(bind=engine) as session:
+        return session.get(User, int(user_id))
 
 @app.route('/')
 def index():
@@ -24,20 +25,21 @@ def register():
         email = request.form['email']
         senha = request.form['senha']
 
-        user = session.query(User).filter_by(email=email).first()
+        with Session(bind=engine) as session:
+            user = session.query(User).filter_by(email=email).first()
 
-        if not user:
-            senha_g = generate_password_hash(senha)
-            new_user = User(email=email, senha=senha_g)
-            session.add(new_user)
-            session.commit()
+            if not user:
+                senha_g = generate_password_hash(senha)
+                new_user = User(email=email, senha=senha_g)
+                session.add(new_user)
+                session.commit()
 
-            login_user(new_user)
+                login_user(new_user)
 
-            session.close()
+                session.close()
 
-            flash('Usuário cadastrado com sucesso!', category='success')
-            return redirect(url_for('index'))
+                flash('Usuário cadastrado com sucesso!', category='success')
+                return redirect(url_for('index'))
 
         session.close()
         flash('Usuário já possui cadastro!', category='error')
@@ -52,14 +54,15 @@ def login():
         email = request.form['email']
         senha = request.form['senha']
 
-        user = session.query(User).filter_by(email=email).first()
+        with Session(bind=engine) as session:
+            user = session.query(User).filter_by(email=email).first()
 
-        if user and check_password_hash(user.senha, senha):
-            login_user(user)
-            session.close()
+            if user and check_password_hash(user.senha, senha):
+                login_user(user)
+                session.close()
 
-            flash('Login realizado com sucesso!', category='success')
-            return redirect(url_for('index'))
+                flash('Login realizado com sucesso!', category='success')
+                return redirect(url_for('index'))
         
         session.close()
         flash('Dados incorretos!', category='error')
@@ -77,10 +80,11 @@ def new_task():
 
         new_task = Tarefa(tarefa=texto, user_id=user_id)
 
-        session.add(new_task)
-        session.commit()
+        with Session(bind=engine) as session:
+            session.add(new_task)
+            session.commit()
 
-        session.close()
+            session.close()
 
         flash('Tarefa adicionada com sucesso', category='success')
         return redirect(url_for('tasks'))
@@ -92,11 +96,12 @@ def new_task():
 def tasks():
     user_id = current_user.id
 
-    user = session.get(User, user_id)
+    with Session(bind=engine) as session:
+        user = session.get(User, user_id)
 
-    tasks = user.tarefas
+        tasks = user.tarefas
 
-    session.close()
+        session.close()
 
     return render_template('tasks.html', tarefas=tasks)
 
@@ -108,13 +113,13 @@ def edit_task():
 
         task_id = request.args['task_id']
 
-        task = session.query(Tarefa).filter_by(id=task_id).first()
-        print(f'dentro: {task_id}')
+        with Session(bind=engine) as session:
+            task = session.query(Tarefa).filter_by(id=task_id).first()
 
-        task.tarefa = texto
+            task.tarefa = texto
 
-        session.commit()
-        session.close()
+            session.commit()
+            session.close()
 
         flash('Tarefa alterada com sucesso!', category='success')
         return redirect(url_for('tasks'))
@@ -126,11 +131,12 @@ def edit_task():
 def delete_task():
     task_id = request.args['task_id']
     
-    task = session.get(Tarefa, task_id)
+    with Session(bind=engine) as session:
+        task = session.get(Tarefa, task_id)
 
-    session.delete(task)
-    session.commit()
-    session.close()
+        session.delete(task)
+        session.commit()
+        session.close()
 
     flash('Tarefa deletada!', category='success')
     return redirect(url_for('tasks'))
