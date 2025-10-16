@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
             {% block title %}
-                
+        
             {% endblock %}
     </title>
+
 </head>
 <body>
+    <nav class="navbar">
+        <a href="{{ url_for('main.index') }}">Início</a>
+        <a href="{{ url_for('users.login') }}">Login</a>
+        <a href="{{ url_for('users.register') }}">Cadastro</a>
+        <a href="{{ url_for('books.books') }}">Livros</a>
+        <a href="{{ url_for('books.register_book') }}">Adicionar Livro</a>
+    </nav>
     <h1>
         {% block title_page %}
             
