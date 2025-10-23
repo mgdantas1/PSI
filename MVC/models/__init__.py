@@ -1,6 +1,4 @@
-from sqlalchemy import create_engine, String, Float, ForeignKey, Column
-from sqlalchemy.orm import Mapped, mapped_column, relationship, Session, DeclarativeBase
-from flask_login import UserMixin
+from sqlalchemy.orm import DeclarativeBase
 
-class Base(UserMixin, DeclarativeBase):
+class Base(DeclarativeBase):
     pass
