@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Adicionar Livro
+{% endblock %}
+
+
+{% block title_page %}
+    Adicionar Livro
+{% endblock %}
+{% block content %}
+{% include 'components/messages.html'   %}
+    <form action="{{url_for('books.register_book')}}", method="post">
+        <label for="titulo">Título:</label>
+        <input type="text" name="titulo" placeholder="titulo">
+        <button>Enviar</button>
+    </form>
+{% endblock %}

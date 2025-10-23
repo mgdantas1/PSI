@@ -12,19 +12,16 @@ class User(Base):
     __tablename__ = 'users'
 
     id:Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    nome:Mapped[str] = mapped_column(String(200))
     email:Mapped[str] = mapped_column(String(150), nullable=False, unique=True)
     senha:Mapped[str] = mapped_column(String(200), nullable=False)
 
-    livros = relationship('Livro', backref='users')
+    livros = relationship('Book', backref='users')
 
-class Livro(Base):
-    __tablename__ = 'users'
+class Book(Base):
+    __tablename__ = 'boks'
 
     id:Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     titulo:Mapped[str] = mapped_column(String(100))
-    genero:Mapped[str] = mapped_column(String(100))
-    autor:Mapped[str] = mapped_column(String(100))
     user_id:Mapped[int] = mapped_column(ForeignKey('users.id'))
 
 Base.metadata.create_all(bind=engine)
