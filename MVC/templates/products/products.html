@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Produtos
+{% endblock %}
+
+{% block title_page %}
+    Produtos
+{% endblock %}
+
+{% block content %}
+    
+    {% if products %}
+            {% for produto in products %}
+                <div class="produto">
+                    <h1>{{produto.nome}}</h1>
+                    <p>R$ {{produto.preco}}</p>
+                </div>
+            {% endfor %}
+    {% endif %}
+
+{% endblock %}

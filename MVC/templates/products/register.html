@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Cadastrar produto
+{% endblock %}
+
+{% block title_page %}
+    Cadastrar produto
+{% endblock %}
+
+{% block content %}    
+
+    <form action="{{url_for('products.register_product')}}" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" placeholder="nome">
+        <label for="preco">Preço:</label>
+        <input type="number" name="preco" placeholder="preço">
+        <button>Enviar</button>
+    </form>
+
+{% endblock %}

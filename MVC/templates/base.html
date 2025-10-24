@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <div class="content">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="{{url_for('index')}}">Página Inicial</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{url_for('products.register_product')}}">Cadastrar produto</a></li>
+                        <li><a href="{{url_for('products.products')}}">Produtos</a></li>
+                        <li><a href="{{url_for('users.logout')}}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{url_for('users.register')}}">Cadastro</a></li>
+                        <li><a href="{{url_for('users.login')}}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <h1>
+                {% block title_page %}
+                    titulo padrão
+                {% endblock %}
+            </h1>
+            {% include 'components/messages.html'   %}
+            {% block content %}
+
+                
+                {% endblock %}
+        </main>
+    </div>
+</body>
+</html>
