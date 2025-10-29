@@ -20,8 +20,8 @@ def register():
                 senha_c = generate_password_hash(senha)
                 new_user = User(email=email, senha=senha_c)
                 session.add(new_user)
-                login_user(new_user)
                 session.commit()
+                login_user(new_user)
 
                 flash('Cadastro realizado com sucesso!', category='success')
                 return redirect(url_for('index'))
